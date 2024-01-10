@@ -1,11 +1,9 @@
 import os
 
 from llama_index import ServiceContext
-from llama_index.llms import OpenAI
+from llama_index.llms.clarifai import Clarifai
 
 
 def create_base_context():
-    model = os.getenv("MODEL", "gpt-3.5-turbo")
-    return ServiceContext.from_defaults(
-        llm=OpenAI(model=model),
-    )
+    MODEL_URL = os.getenv("MODEL_URL")
+    return ServiceContext.from_defaults(llm_model=Clarifai(model_url=MODEL_URL))
